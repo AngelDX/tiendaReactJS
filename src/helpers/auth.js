@@ -25,3 +25,25 @@ export function saveUser (user) {
     })
     .then(() => user)
 }
+/*
+export function getProductos(){
+  let d:Object[]=[]
+  ref.once("value", function(data) {
+    data.forEach(function(data) {
+      d=data.val()
+    })
+  }, function (error) {
+     console.log("Error: " + error.code) ;
+  });
+ 
+}
+*/
+export function getProductos(){
+  //let d:Object[]=[]
+  return ref.once("value", function(data) {
+    data.val()
+  }, function (error) {
+     console.log("Error: " + error.code) ;
+  });
+ 
+}

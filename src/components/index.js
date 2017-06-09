@@ -5,6 +5,8 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
+import Descripcion from './protected/Descripcion'
+import ItemCar from './protected/ItemCar'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 
@@ -60,14 +62,14 @@ export default class App extends Component {
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container">
               <div className="navbar-header">
-                <Link to="/" className="navbar-brand">React Router + Firebase Auth</Link>
+                <Link to="/" className="navbar-brand">TiendaReactJS</Link>
               </div>
               <ul className="nav navbar-nav pull-right">
                 <li>
                   <Link to="/" className="navbar-brand">Home</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
+                  <Link to="/dashboard" className="navbar-brand">Catalogo</Link>
                 </li>
                 <li>
                   {this.state.authed
@@ -92,6 +94,9 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
+                <PrivateRoute authed={this.state.authed} path='/descripcion' component={Descripcion} />
+                <PrivateRoute authed={this.state.authed} path='/itemcar' component={ItemCar} />
+                
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

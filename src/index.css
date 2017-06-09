@@ -3,3 +3,29 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.productos{
+	display: flex;
+  	flex-flow: row wrap;
+}
+
+.item{
+	width: 275px;
+	border: 1px solid black;
+	padding: 10px;	
+	margin: 5px;
+}
+
+figure{
+	text-align: center;
+}
+
+.imagen{
+	width: 80%;
+}
+
+.descripcion .cantidad{
+	width: 50px;
+}
+
+
