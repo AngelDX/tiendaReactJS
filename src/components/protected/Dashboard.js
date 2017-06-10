@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import { getProductos } from '../../helpers/auth'
 import { refprod } from '../../config/constants'
 import SearchInput, {createFilter} from 'react-search-input'
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Link, Switch } from 'react-router-dom'
 
 export default class Dashboard extends Component {
   constructor(){
@@ -13,7 +13,6 @@ export default class Dashboard extends Component {
   	};
   
   }
-
   
   componentWillMount(){
 	refprod.once('value',snapshot=>{
@@ -59,7 +58,7 @@ export default class Dashboard extends Component {
 						<p>Precio: S/. {producto.precio} </p>
 						<p>Unidades disponibles: {producto.unidades}</p>
 						<div className="botones">
-							<Link to="/Descripcion" className="btn btn-primary">Ver mas</Link>
+							<Link to={`/Descripcion/${producto.nombre}`} className="btn btn-primary">Ver mas</Link>
 							<Link to="/AddCar" className="btn btn-success">Añadir</Link>
 							<input type="number" className="cantidad" value="1"/>
 						</div>

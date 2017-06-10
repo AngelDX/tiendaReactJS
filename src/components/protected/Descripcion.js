@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import axios from 'axios';
 
 export default class Descripcion extends Component {
@@ -7,17 +7,24 @@ export default class Descripcion extends Component {
   	super(props);
   	this.state={
   		mensaje: 'Bienvenidos....',
-      producto: []
+      producto: {}
   	}
   }
+  
 
   componentWillMount() {
-    let pro: []
+
+    console.log(this.props.match.params.nombre)
+    let item=this.props.match.params.nombre
     axios.get('https://crud-58fe9.firebaseio.com/productos.json')
       .then( (response) => {
+        var pro={};
         response.data.forEach(function(product){
-          pro.push(product)
-        })
+          if(product.nombre==item){
+            pro=product;
+          }
+          
+        });
         this.setState({
           producto: pro
         })
@@ -28,10 +35,11 @@ export default class Descripcion extends Component {
   }
 
   render(){
+    
   	return(
   		<div>
-  			<h1>{this.state.producto}</h1>
-  		
+  			<h1>{this.state.producto.nombre}</h1>
+      
       <div className="row">
         <div className="col-md-12">
           <h1></h1>
@@ -40,19 +48,21 @@ export default class Descripcion extends Component {
       <div className="row">
         <div className="col-sm-6">
           <figure>
-            <img className="imagen" src="{ }"/>
+            <img className="imagen" src={this.state.producto.url}/>
           </figure>
         </div>
         <div className="col-sm-6">
           <div className="descripcion">
-            <p>Precio: </p>
-            <p>Unidades Disponibles: </p>
+            <p>Precio: {this.state.producto.precio}</p>
+            <p>Unidades Disponibles: {this.state.producto.unidades}</p>
           </div>
         </div>
         </div>
+        <br/>
       <Link to="/Dashboard" className="btn btn-success">Regresar</Link>
     </div> 
   	)
   }
 
 }
+
