@@ -9,6 +9,7 @@ import Descripcion from './protected/Descripcion'
 import ItemCar from './protected/ItemCar'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
+import {totalcarro} from './protected/Dashboard'
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -36,6 +37,7 @@ export default class App extends Component {
   state = {
     authed: false,
     loading: true,
+    totalcarro: "4"
   }
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
@@ -55,6 +57,11 @@ export default class App extends Component {
   componentWillUnmount () {
     this.removeListener()
   }
+
+  verItemCar(){
+
+  }
+
   render() {
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
@@ -66,19 +73,20 @@ export default class App extends Component {
               </div>
               <ul className="nav navbar-nav pull-right">
                 <li>
-                  <Link to="/" className="navbar-brand">Home</Link>
-                </li>
-                <li>
                   <Link to="/dashboard" className="navbar-brand">Catalogo</Link>
                 </li>
                 <li>
                   {this.state.authed
-                    ? <button
-                        style={{border: 'none', background: 'transparent'}}
-                        onClick={() => {
-                          logout()
-                        }}
-                        className="navbar-brand">Logout</button>
+                    ? 
+                      <span>
+                        <Link to="/itemcar" className="navbar-brand glyphicon glyphicon-shopping-cart btn"><span className="badge">{this.state.totalcarro}</span></Link>
+                        <button
+                          style={{border: 'none', background: 'transparent'}}
+                          onClick={() => {
+                            logout()
+                          }}
+                          className="navbar-brand">Logout</button>
+                      </span>
                     : <span>
                         <Link to="/login" className="navbar-brand">Login</Link>
                         <Link to="/register" className="navbar-brand">Register</Link>

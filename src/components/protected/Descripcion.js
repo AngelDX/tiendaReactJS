@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 export default class Descripcion extends Component {
@@ -10,20 +10,17 @@ export default class Descripcion extends Component {
       producto: {}
   	}
   }
-  
 
   componentWillMount() {
-
     console.log(this.props.match.params.nombre)
     let item=this.props.match.params.nombre
     axios.get('https://crud-58fe9.firebaseio.com/productos.json')
       .then( (response) => {
         var pro={};
         response.data.forEach(function(product){
-          if(product.nombre==item){
+          if(product.nombre===item){
             pro=product;
           }
-          
         });
         this.setState({
           producto: pro
